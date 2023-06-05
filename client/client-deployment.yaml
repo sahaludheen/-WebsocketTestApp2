@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: websocket-client
+  namespace: test
+  annotations:
+    argocd.argoproj.io/sync-wave: "2" 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: websocket-client
+      namespace: test
+  template:
+    metadata:
+      labels:
+        app: websocket-client
+        namespace: test
+    spec:
+      containers:
+        - name: websocket-client
+          image: websocket-client:dev
